@@ -61,7 +61,7 @@ const WebviewerComponent = ({ documentUrl, viewerSize, showUIComponents }) => {
         initializeWebViewer();
 
         return () => {
-            if (!isDevelopment && instanceRef.current) {
+            if (instanceRef.current) {
                 console.log('Disposing WebViewer instance');
                 instanceRef.current.UI.dispose();
                 instanceRef.current = null;

@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import NavBar from './components/NavBar';
 import './App.css'
 import WebviewerComponent from './components/WebviewerComponent' 
 
@@ -10,16 +12,19 @@ function App() {
   const [showUIComponents, setShowUIComponents] = useState(true);
 
   return (
+    <Router>
     <div className="App">
+      <NavBar />
       <div>
         <h1>Apryse Viewer Application</h1>
       </div>
-      <WebviewerComponent 
-        documentUrl={activeDocument} 
+      <Routes>
+        <Route path="/" element={<WebviewerComponent  documentUrl={activeDocument} 
         viewerSize={viewerSize} 
-        showUIComponents={showUIComponents} 
-      />
+        showUIComponents={showUIComponents} />} />
+      </Routes>
     </div>
+    </Router>
   )
 }
 
