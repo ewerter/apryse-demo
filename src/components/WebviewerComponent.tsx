@@ -1,5 +1,6 @@
-import { use, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import WebViewer from '@pdftron/webviewer';
+import { apryseConfig } from '../config/apryse';
 
 
 const WebviewerComponent = ({ documentUrl, viewerSize, showUIComponents }) => {
@@ -19,10 +20,12 @@ const WebviewerComponent = ({ documentUrl, viewerSize, showUIComponents }) => {
                 const instance = await WebViewer({
                     path: '/lib/webviewer',
                     initialDoc: documentUrl,
-                    licenseKey: 'demo:1765203522336:60f5b5ff0300000000995b638443fe06818aa73fc45069223af0e5112b',
+                    licenseKey: apryseConfig.licenseKey,
                     enableFilePicker: true,
-                    disabledElements: showUIComponents ? [] : [
+                    disabledElements: [
                         'header',
+                        'viewControlsButton',
+                        'leftPanel'
                     ],
                     enableRedaction: true,
                     enableMeasurement: true,
@@ -37,6 +40,12 @@ const WebviewerComponent = ({ documentUrl, viewerSize, showUIComponents }) => {
                 instance.UI.Feature.ContentEdit,
                 instance.UI.Feature.Annotations
                 ]);
+
+                //simulate loading overlay delay
+                setTimeout(() => {
+                    console.log('initialization completed');
+                    setLoading(false);
+                    }, 300);
 
                 //check if document is loaded
                 instance.UI.addEventListener('documentLoaded', () => {
