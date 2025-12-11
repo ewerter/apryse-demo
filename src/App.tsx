@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import './App.css'
 import WebviewerComponent from './components/WebviewerComponent' 
+import ImageToPdf from './components/ImageToPdf';
 
 function App() {
   const [activeDocument, setActiveDocument] = useState(
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<WebviewerComponent  documentUrl={activeDocument} 
         viewerSize={viewerSize} 
         showUIComponents={showUIComponents} />} />
+        <Route path="/image-to-pdf" element={<ImageToPdf />} />
       </Routes>
     </div>
     </Router>
